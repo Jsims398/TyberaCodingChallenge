@@ -73,6 +73,28 @@ class IngestorTest {
         assertEquals("image/png", sink.getLastResult().getDetectedMime());
         assertEquals(pngData.length, sink.getLastResult().getSize());
     }
+
+    @Test
+    void testHappyPathDocx() throws Exception {
+        byte[] docxData = TestDataFactory.createMockDocx();
+
+        UploadMeta meta = new UploadMeta(
+            "test.docx",
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            Optional.of((long)docxData.length)
+        );
+
+        ByteSource source = new InputStreamByteSource(new ByteArrayInputStream(docxData));
+        ingestor.ingest(meta, defaultConfig, source, sink);
+
+        assertTrue(sink.getLastResult().isOk(), "Docx should be accepted");
+        assertEquals("application/vnd.openxmlformats-officedocument.wordprocessingml.document", 
+                     sink.getLastResult().getDetectedMime());
+        assertEquals(docxData.length, sink.getLastResult().getSize());
+        assertEquals(docxData.length, sink.getBytesConsumed());
+        assertNotNull(sink.getLastResult().getSha256());
+        assertEquals(64, sink.getLastResult().getSha256().length()); // SHA-256 hex length
+    }
     
     @Test
     void testContentLengthMismatch() throws Exception {
