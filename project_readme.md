@@ -6,13 +6,13 @@ A protocol-agnostic document validation and forwarding system that handles file 
 
 ## 📋 Table of Contents
 
-- [Overview](#overview)
-- [Architecture](#architecture)
-- [Project Structure](#project-structure)
-- [Key Components](#key-components)
-- [How It Works](#how-it-works)
-- [Running Tests](#running-tests)
-- [Usage Examples](#usage-examples)
+- Overview
+- Architecture
+- Project Structure
+- Key Components
+- How It Works
+- Running Tests
+- Usage Examples
 
 ---
 
